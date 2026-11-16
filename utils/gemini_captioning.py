@@ -3,8 +3,8 @@ from PIL import Image
 
 class GeminiCaptioner:
     def __init__(self, api_key):
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        genai.configure(api_key=api_key, transport="rest")
+        self.model = genai.GenerativeModel("gemini-2.5-flash")
 
     def caption(self, image_path, prompt="Describe this image"):
         """

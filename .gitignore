@@ -18,3 +18,5 @@ temp/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+utils/gemini_api_key.txt
