@@ -1,0 +1,7 @@
+
+gradio==5.24.0
+ultralytics==8.3.105
+google-generativeai==0.8.5
+numpy==2.1.1
+Pillow==10.3.0
+opencv-python==4.11.0.86
