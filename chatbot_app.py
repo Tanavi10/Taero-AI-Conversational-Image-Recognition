@@ -858,30 +858,20 @@ def find_free_port(start_port=7860, end_port=8000):
 # 4. INITIALIZE AI MODELS
 # ==================================================
 
-def initialize_models():
 
-    try:
-        print("Loading Taero AI models...")
+# Create lightweight model handlers.
+# The actual AI models will load only when needed.
 
-        captioner = GeminiCaptioner(GEMINI_API_KEY)
-        vqa = GeminiVQA(GEMINI_API_KEY)
-        detector = YOLOv12Detector()
+captioner = GeminiCaptioner(GEMINI_API_KEY)
+vqa = GeminiVQA(GEMINI_API_KEY)
+detector = YOLOv12Detector()
 
-        print("All Taero AI models loaded successfully!")
-
-        return captioner, detector, vqa
-
-    except Exception as e:
-        print(f"Model initialization failed: {e}")
-        raise
-
-
-captioner, detector, vqa = initialize_models()
 
 
 # ==================================================
 # 5. IMAGE ANALYSIS
 # ==================================================
+
 
 def process_image(image):
 
@@ -909,6 +899,9 @@ def process_image(image):
         yield None, "Analyzing your image...", None
 
         # YOLOv12 object detection
+        if detector.model is None:
+            yield None, "Loading YOLOv12 model for the first time...", None
+
         detected_image = detector.detect(image_path)
 
         yield (
